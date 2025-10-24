@@ -14,9 +14,6 @@ db.sqlite3
 staticfiles/
 *.log
 
-# Modelos o datos grandes opcionales (si no quieres subirlos)
-*.pkl
-
 # IDEs y sistemas operativos
 .vscode/
 .idea/
