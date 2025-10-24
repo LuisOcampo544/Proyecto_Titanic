@@ -56,5 +56,18 @@ DATABASES = {
 
 # Configuración de archivos estáticos
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR.parent / 'Frontend' / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Aquí Django recopila CSS y JS para producción
+
+# Carpetas donde Django busca tus archivos estáticos en desarrollo
+STATICFILES_DIRS = [
+    BASE_DIR.parent / 'Frontend' / 'static',
+]
+
+# Carpeta donde Django recopila archivos estáticos para producción
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Seguridad para archivos estáticos en producción
+# Si Render usa WhiteNoise, se puede agregar
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
+# WhiteNoise para servir archivos estáticos con caching
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
