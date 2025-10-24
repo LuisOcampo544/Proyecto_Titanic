@@ -1,0 +1,23 @@
+# Entorno virtual
+venv/
+ENV/
+
+# Archivos de Python compilados
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Base de datos SQLite
+db.sqlite3
+
+# Archivos estáticos recolectados (no subir)
+staticfiles/
+*.log
+
+# Modelos o datos grandes opcionales (si no quieres subirlos)
+*.pkl
+
+# IDEs y sistemas operativos
+.vscode/
+.idea/
+.DS_Store

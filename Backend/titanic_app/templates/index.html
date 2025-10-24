@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulación Titanic</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<style>
+  table.fare-table {
+    margin: 10px auto;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    text-align: center;
+  }
+  table.fare-table th, table.fare-table td {
+    border: 1px solid #333;
+    padding: 5px 10px;
+  }
+  table.fare-table th {
+    background-color: #eee;
+  }
+  /* Mensajes de predicción */
+  .success { color: green; font-weight: bold; }
+  .fail { color: red; font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Simulación de Supervivencia en el Titanic</h1>
+
+  <form id="titanicForm">
+    <label>Clase:</label>
+    <select id="pclass" required>
+      <option value="1">Primera</option>
+      <option value="2">Segunda</option>
+      <option value="3">Tercera</option>
+    </select><br>
+
+    <label>Sexo:</label>
+    <select id="sex">
+      <option>Hombre</option>
+      <option>Mujer</option>
+    </select><br>
+
+    <label>Edad:</label>
+    <input type="number" id="age" required min="0" max="100"><br>
+
+    <label>Tarifa pagada:</label>
+    <input type="number" id="fare" required><br>
+
+    <label>Puerto de embarque:</label>
+    <select id="embarked">
+      <option>C</option>
+      <option>Q</option>
+      <option>S</option>
+    </select><br>
+
+    <table class="fare-table">
+      <thead>
+        <tr>
+          <th>Clase</th>
+          <th>Rango de tarifa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1ra</td>
+          <td>30 - 80</td>
+        </tr>
+        <tr>
+          <td>2da</td>
+          <td>13 - 29</td>
+        </tr>
+        <tr>
+          <td>3ra</td>
+          <td>7 - 12</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button type="submit">Predecir</button>
+  </form>
+
+  <div id="result"></div>
+</div>
+
+<script>
+document.getElementById("titanicForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  const res = await fetch("/api/predict/", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      Pclass: document.getElementById("pclass").value,
+      Sex: document.getElementById("sex").value,
+      Age: document.getElementById("age").value,
+      Fare: document.getElementById("fare").value,
+      Embarked: document.getElementById("embarked").value
+    })
+  });
+
+  const data = await res.json();
+  const resultDiv = document.getElementById("result");
+
+  if(data.error){
+    resultDiv.innerText = "Error: " + data.error;
+  } else {
+    if (data.prediction === 1) {
+      resultDiv.innerHTML = `
+        <p class="success">Felicidades, hubieras sobrevivido</p>
+        <p>Tu porcentaje de supervivencia es ${data.probability}%</p>
+      `;
+    } else {
+      resultDiv.innerHTML = `
+        <p class="fail">Lo siento, no hubieras sobrevivido</p>
+        <p>Tu porcentaje de supervivencia es ${data.probability}%</p>
+      `;
+    }
+  }
+});
+</script>
+</body>
+</html>

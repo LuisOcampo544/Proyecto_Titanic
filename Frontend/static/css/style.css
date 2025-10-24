@@ -1,0 +1,103 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0d1b2a;
+  color: #e0e1dd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: #1b263b;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px #415a77;
+  width: 320px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #ffd700;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 3px;
+  text-align: left;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 7px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #0077b6;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #00b4d8;
+}
+
+.fare-table {
+  margin: 15px auto;
+  border-collapse: collapse;
+  width: 60%;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fare-table th {
+  background-color: #0d47a1;
+  color: black;
+  padding: 8px;
+}
+
+.fare-table td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  color: #333;
+}
+
+.fare-table tr:nth-child(even) {
+  background-color: #f2f9ff;
+}
+
+.fare-table tr:nth-child(odd) {
+  background-color: white;
+}
+
+
+.success {
+  color: #2ecc71; 
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.fail {
+  color: #e74c3c; 
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+#result p {
+  margin: 5px 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
