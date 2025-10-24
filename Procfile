@@ -1,1 +1,2 @@
-web: gunicorn Backend.titanic_project.wsgi
+web: gunicorn titanic_project.wsgi --chdir Backend
+
